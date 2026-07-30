@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/backgroundDark"
     android:padding="16dp">
 
     <TextView
@@ -11,12 +12,14 @@
         android:text="Génération par groupes Modulo 9"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:textColor="@color/textPrimary"
         android:layout_marginBottom="12dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Choisissez un ou plusieurs groupes :"
+        android:textColor="@color/textSecondary"
         android:layout_marginBottom="8dp" />
 
     <GridLayout
@@ -25,15 +28,15 @@
         android:columnCount="3"
         android:layout_marginBottom="12dp">
 
-        <CheckBox android:id="@+id/cbG1" android:text="G1" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content" />
-        <CheckBox android:id="@+id/cbG2" android:text="G2" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content" />
-        <CheckBox android:id="@+id/cbG3" android:text="G3" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content" />
-        <CheckBox android:id="@+id/cbG4" android:text="G4" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content" />
-        <CheckBox android:id="@+id/cbG5" android:text="G5" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content" />
-        <CheckBox android:id="@+id/cbG6" android:text="G6" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content" />
-        <CheckBox android:id="@+id/cbG7" android:text="G7" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content" />
-        <CheckBox android:id="@+id/cbG8" android:text="G8" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content" />
-        <CheckBox android:id="@+id/cbG9" android:text="G9" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content" />
+        <CheckBox android:id="@+id/cbG1" android:text="G1" android:textColor="@color/textPrimary" android:buttonTint="@color/colorPrimary" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content" />
+        <CheckBox android:id="@+id/cbG2" android:text="G2" android:textColor="@color/textPrimary" android:buttonTint="@color/colorPrimary" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content" />
+        <CheckBox android:id="@+id/cbG3" android:text="G3" android:textColor="@color/textPrimary" android:buttonTint="@color/colorPrimary" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content" />
+        <CheckBox android:id="@+id/cbG4" android:text="G4" android:textColor="@color/textPrimary" android:buttonTint="@color/colorPrimary" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content" />
+        <CheckBox android:id="@+id/cbG5" android:text="G5" android:textColor="@color/textPrimary" android:buttonTint="@color/colorPrimary" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content" />
+        <CheckBox android:id="@+id/cbG6" android:text="G6" android:textColor="@color/textPrimary" android:buttonTint="@color/colorPrimary" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content" />
+        <CheckBox android:id="@+id/cbG7" android:text="G7" android:textColor="@color/textPrimary" android:buttonTint="@color/colorPrimary" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content" />
+        <CheckBox android:id="@+id/cbG8" android:text="G8" android:textColor="@color/textPrimary" android:buttonTint="@color/colorPrimary" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content" />
+        <CheckBox android:id="@+id/cbG9" android:text="G9" android:textColor="@color/textPrimary" android:buttonTint="@color/colorPrimary" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content" />
 
     </GridLayout>
 
@@ -49,6 +52,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="90"
+            android:textColor="@color/textPrimary"
+            android:buttonTint="@color/colorPrimary"
             android:checked="true" />
 
         <RadioButton
@@ -56,14 +61,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="180" />
+            android:text="180"
+            android:textColor="@color/textPrimary"
+            android:buttonTint="@color/colorPrimary" />
 
         <RadioButton
             android:id="@+id/rbModulo360"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="360" />
+            android:text="360"
+            android:textColor="@color/textPrimary"
+            android:buttonTint="@color/colorPrimary" />
 
     </RadioGroup>
 
@@ -72,6 +81,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="GÉNÉRER AVEC CES GROUPES"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="#FFFFFF"
         android:layout_marginBottom="16dp" />
 
     <ScrollView
@@ -83,6 +94,9 @@
             android:id="@+id/tvResultatModulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/surfaceDarker"
+            android:padding="12dp"
+            android:textColor="@color/textPrimary"
             android:textSize="14sp"
             android:fontFamily="monospace" />
 

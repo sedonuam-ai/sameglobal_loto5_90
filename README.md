@@ -10,10 +10,25 @@ Application Android (Java) pour le Loto 5/90 avec système réducteur de génér
 
 1. **Génération de grilles** (90 / 180 / 360 grilles de 5 numéros, équilibrées sur 1-90)
 2. **Affichage des grilles** générées (liste défilante)
-3. **Vérification d'un tirage** (comptage des bons numéros, gagnants, paires, triplets)
+3. **Vérification d'un tirage** (5 cases de saisie avec avancement automatique du curseur,
+   comptage des bons numéros, gagnants, paires, triplets)
 4. **Statistiques** (fréquence, pair/impair, sommes, numéros extrêmes)
 5. **Historique persistant** (tirages et grilles enregistrés en base SQLite)
 6. **Génération ciblée par groupes Modulo 9** (combinaison de plusieurs groupes G1 à G9)
+
+## Design
+
+- **Thème sombre** appliqué à tous les écrans (forcé, indépendant du réglage clair/sombre du téléphone).
+- **Logo / icône de l'application** : un dé stylisé (motif à 5 points, en référence au Loto 5/90)
+  sur fond bleu en losange. Fournie en icône adaptative (Android 8+) et en PNG classique
+  pour les versions antérieures — visible sur l'écran d'accueil du téléphone une fois installée.
+
+## Fonctionnement hors ligne
+
+L'application ne déclare **aucune permission Internet** dans son manifest et ne fait
+strictement aucun appel réseau : génération des grilles, vérification, statistiques et
+historique fonctionnent entièrement en local (calculs en mémoire + base SQLite embarquée).
+Elle est donc **100 % utilisable sans connexion**, y compris en mode avion.
 
 ## Compilation automatique (GitHub Actions)
 

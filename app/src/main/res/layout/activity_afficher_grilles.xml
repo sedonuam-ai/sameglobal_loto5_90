@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/backgroundDark"
     android:padding="16dp">
 
     <TextView
@@ -12,6 +13,7 @@
         android:text="Grilles générées"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:textColor="@color/textPrimary"
         android:layout_marginBottom="12dp" />
 
     <androidx.recyclerview.widget.RecyclerView

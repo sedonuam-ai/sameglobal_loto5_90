@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@color/backgroundDark"
     android:padding="24dp">
 
     <TextView
@@ -12,6 +13,7 @@
         android:text="SAME GLOBAL SERVICES"
         android:textSize="22sp"
         android:textStyle="bold"
+        android:textColor="@color/textPrimary"
         android:gravity="center" />
 
     <TextView
@@ -21,6 +23,7 @@
         android:layout_marginBottom="32dp"
         android:text="Loto5/90 Système Réducteur"
         android:textSize="16sp"
+        android:textColor="@color/textSecondary"
         android:gravity="center" />
 
     <Button
@@ -28,6 +31,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/surfaceDark"
+        android:textColor="@color/textPrimary"
         android:text="1. GÉNÉRER LE SYSTÈME" />
 
     <Button
@@ -35,6 +40,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/surfaceDark"
+        android:textColor="@color/textPrimary"
         android:text="2. AFFICHER LES GRILLES" />
 
     <Button
@@ -42,6 +49,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/surfaceDark"
+        android:textColor="@color/textPrimary"
         android:text="3. VÉRIFIER UN TIRAGE" />
 
     <Button
@@ -49,12 +58,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/surfaceDark"
+        android:textColor="@color/textPrimary"
         android:text="4. STATISTIQUES" />
 
     <Button
         android:id="@+id/btnHistorique"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/surfaceDark"
+        android:textColor="@color/textPrimary"
         android:text="5. HISTORIQUE" />
 
     <Button
@@ -62,6 +75,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="#FFFFFF"
         android:text="6. GÉNÉRATION PAR GROUPES MODULO 9" />
 
 </LinearLayout>

@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1565C0</color>
-    <color name="colorPrimaryDark">#0D47A1</color>
-    <color name="colorAccent">#FFC107</color>
-    <color name="iconBackground">#1565C0</color>
+    <!-- Accent principal (boutons, en-têtes, icône) -->
+    <color name="colorPrimary">#3B82F6</color>
+    <color name="colorPrimaryDark">#1E3A8A</color>
+    <color name="colorAccent">#3B82F6</color>
+
+    <!-- Palette sombre -->
+    <color name="backgroundDark">#12141A</color>
+    <color name="surfaceDark">#1A1D24</color>
+    <color name="surfaceDarker">#0D0F14</color>
+    <color name="borderDark">#262A35</color>
+    <color name="textPrimary">#F1F5F9</color>
+    <color name="textSecondary">#94A3B8</color>
+    <color name="textMuted">#64748B</color>
+    <color name="errorColor">#F87171</color>
+
+    <color name="iconBackground">#3B82F6</color>
 </resources>

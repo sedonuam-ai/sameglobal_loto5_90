@@ -4,10 +4,18 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+
+    <!-- Dé (dice) stylisé : carré arrondi blanc avec 5 points bleus (motif "5" du Loto 5/90) -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M54,30 L60,48 L79,48 L64,59 L69,77 L54,66 L39,77 L44,59 L29,48 L48,48 Z" />
-    <path
-        android:fillColor="#FFC107"
-        android:pathData="M20,84 L88,84 L88,90 L20,90 Z" />
+        android:pathData="M32,32 h44 a10,10 0 0 1 10,10 v44 a10,10 0 0 1 -10,10 h-44 a10,10 0 0 1 -10,-10 v-44 a10,10 0 0 1 10,-10 z" />
+
+    <!-- 4 points aux coins -->
+    <path android:fillColor="#3B82F6" android:pathData="M42,42 m-6,0 a6,6 0 1,0 12,0 a6,6 0 1,0 -12,0" />
+    <path android:fillColor="#3B82F6" android:pathData="M76,42 m-6,0 a6,6 0 1,0 12,0 a6,6 0 1,0 -12,0" />
+    <path android:fillColor="#3B82F6" android:pathData="M42,76 m-6,0 a6,6 0 1,0 12,0 a6,6 0 1,0 -12,0" />
+    <path android:fillColor="#3B82F6" android:pathData="M76,76 m-6,0 a6,6 0 1,0 12,0 a6,6 0 1,0 -12,0" />
+
+    <!-- point central -->
+    <path android:fillColor="#3B82F6" android:pathData="M59,59 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0" />
 </vector>
