@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="6dp"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@color/surfaceDark"
             android:textColor="#FFFFFF"
             android:text="TIRAGES" />
 
@@ -56,5 +56,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btnEffacerHistorique"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#B3261E"
+        android:textColor="#FFFFFF"
+        android:text="EFFACER / RÉINITIALISER GRILLES ET HISTORIQUE" />
 
 </LinearLayout>
