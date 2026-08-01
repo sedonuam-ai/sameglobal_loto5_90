@@ -1,19 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- Accent principal (boutons, en-têtes, icône) -->
-    <color name="colorPrimary">#3B82F6</color>
-    <color name="colorPrimaryDark">#1E3A8A</color>
-    <color name="colorAccent">#3B82F6</color>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/backgroundDark"
+    android:padding="16dp">
 
-    <!-- Palette sombre -->
-    <color name="backgroundDark">#12141A</color>
-    <color name="surfaceDark">#1A1D24</color>
-    <color name="surfaceDarker">#0D0F14</color>
-    <color name="borderDark">#262A35</color>
-    <color name="textPrimary">#F1F5F9</color>
-    <color name="textSecondary">#94A3B8</color>
-    <color name="textMuted">#64748B</color>
-    <color name="errorColor">#F87171</color>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Historique"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/textPrimary"
+        android:layout_marginBottom="16dp" />
 
-    <color name="iconBackground">#3B82F6</color>
-</resources>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="12dp">
+
+        <Button
+            android:id="@+id/btnOngletTirages"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:backgroundTint="@color/surfaceDark"
+            android:textColor="#FFFFFF"
+            android:text="TIRAGES" />
+
+        <Button
+            android:id="@+id/btnOngletGrilles"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="6dp"
+            android:backgroundTint="@color/surfaceDark"
+            android:textColor="@color/textPrimary"
+            android:text="GRILLES" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvSousTitre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginBottom="8dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvHistorique"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btnEffacerHistorique"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#B3261E"
+        android:textColor="#FFFFFF"
+        android:text="EFFACER / RÉINITIALISER GRILLES ET HISTORIQUE" />
+
+</LinearLayout>
