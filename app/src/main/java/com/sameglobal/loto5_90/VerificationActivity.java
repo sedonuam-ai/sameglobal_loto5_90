@@ -1,22 +1,28 @@
 package com.sameglobal.loto5_90;
 
+import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import java.util.List;
 
 public class VerificationActivity extends AppCompatActivity {
 
     private EditText[] casesTirage;
     private Button btnVerifierTirage;
-    private TextView tvResultatVerification;
+    private LinearLayout llResultats;
     private GenerateurSysteme generateurSysteme;
 
     @Override
@@ -29,7 +35,7 @@ public class VerificationActivity extends AppCompatActivity {
                 findViewById(R.id.etCase4), findViewById(R.id.etCase5)
         };
         btnVerifierTirage = findViewById(R.id.btnVerifierTirage);
-        tvResultatVerification = findViewById(R.id.tvResultatVerification);
+        llResultats = findViewById(R.id.llResultats);
 
         generateurSysteme = GrillesRepository.getInstance().getGenerateurSysteme();
 
@@ -43,13 +49,6 @@ public class VerificationActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Configure chaque case pour :
-     * - passer automatiquement à la case suivante dès que 2 chiffres sont saisis,
-     *   ou dès qu'un seul chiffre rend impossible un second chiffre valide (ex: "9"
-     *   ne peut pas être suivi d'un chiffre car "9x" dépasserait 90 sauf "90" lui-même).
-     * - revenir à la case précédente avec la touche Retour arrière si la case est vide.
-     */
     private void configurerAutoAvance() {
         for (int i = 0; i < casesTirage.length; i++) {
             final int index = i;
@@ -74,8 +73,6 @@ public class VerificationActivity extends AppCompatActivity {
 
                     if (valeur.length() == 1) {
                         int chiffre = Integer.parseInt(valeur);
-                        // Si "chiffre" suivi d'un 2e chiffre dépasserait toujours 90
-                        // (sauf le cas exact "9" -> "90"), on avance directement.
                         if (chiffre >= 1 && chiffre * 10 > GenerateurSysteme.NUMERO_MAX && chiffre != 9) {
                             unSeulChiffreMaisNePeutPasContinuer = true;
                         }
@@ -118,45 +115,47 @@ public class VerificationActivity extends AppCompatActivity {
             return;
         }
 
-        // Enregistrement du tirage dans l'historique
         DatabaseHelper.getInstance(this).insertTirage(
                 generateurSysteme.formaterGrille(tirage));
 
-        List<int[]> grilles = generateurSysteme.getGrilles();
-        StringBuilder sb = new StringBuilder();
+        llResultats.removeAllViews();
 
-        int nombreGagnants = 0; // grilles avec 3+ bons numéros
-        int totalPaires = 0;    // grilles avec exactement 2 bons numéros
-        int totalTriplets = 0;  // grilles avec exactement 3 bons numéros
+        List<int[]> grilles = generateurSysteme.getGrilles();
+
+        int nombreGrillesGagnantes = 0;
+        int totalPairesGagnees = 0;
 
         for (int i = 0; i < grilles.size(); i++) {
             int[] grille = grilles.get(i);
             int bons = compterBonsNumeros(grille, tirage);
+            int gain = calculerGain(bons);
 
-            if (bons >= 2) {
-                sb.append("Grille ").append(i + 1).append(" :\n");
-                sb.append(bons).append(" bons numéros\n\n");
-            }
-
-            if (bons >= 3) {
-                nombreGagnants++;
-            }
-            if (bons == 2) {
-                totalPaires++;
-            }
-            if (bons == 3) {
-                totalTriplets++;
+            if (gain > 0) {
+                nombreGrillesGagnantes++;
+                totalPairesGagnees += gain;
+                llResultats.addView(creerVueGrilleResultat(i + 1, grille, bons, gain));
             }
         }
 
-        sb.append("========================\n");
-        sb.append("RÉSUMÉ\n");
-        sb.append("========================\n");
-        sb.append("Grilles gagnantes (3+ bons) : ").append(nombreGagnants).append("\n");
-        sb.append("Grilles avec paires (2 bons) : ").append(totalPaires).append("\n");
-        sb.append("Grilles avec triplets (3 bons) : ").append(totalTriplets).append("\n");
+        llResultats.addView(creerVueResume(nombreGrillesGagnantes, totalPairesGagnees));
+    }
 
-        tvResultatVerification.setText(sb.toString());
+    /**
+     * Table des gains :
+     * 5 bons numéros = 10 paires
+     * 4 bons numéros = 6 paires
+     * 3 bons numéros = 3 paires
+     * 2 bons numéros = 1 paire
+     * 1 bon numéro   = 0 paire
+     */
+    private int calculerGain(int bons) {
+        switch (bons) {
+            case 5: return 10;
+            case 4: return 6;
+            case 3: return 3;
+            case 2: return 1;
+            default: return 0;
+        }
     }
 
     private int compterBonsNumeros(int[] grille, int[] tirage) {
@@ -170,6 +169,76 @@ public class VerificationActivity extends AppCompatActivity {
             }
         }
         return count;
+    }
+
+    /**
+     * Crée une carte avec un encadré doré pour une grille gagnante.
+     */
+    private View creerVueGrilleResultat(int numeroGrille, int[] grille, int bons, int gain) {
+        LinearLayout conteneur = new LinearLayout(this);
+        conteneur.setOrientation(LinearLayout.VERTICAL);
+        conteneur.setPadding(dp(12), dp(10), dp(12), dp(10));
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(0, 0, 0, dp(10));
+        conteneur.setLayoutParams(params);
+
+        GradientDrawable fond = new GradientDrawable();
+        fond.setColor(ContextCompat.getColor(this, R.color.surfaceDarker));
+        fond.setStroke(dp(2), ContextCompat.getColor(this, R.color.colorGold));
+        fond.setCornerRadius(dp(8));
+        conteneur.setBackground(fond);
+
+        TextView tvTitre = new TextView(this);
+        tvTitre.setText("🏆 Grille " + numeroGrille + " :");
+        tvTitre.setTextColor(ContextCompat.getColor(this, R.color.colorGold));
+        tvTitre.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        tvTitre.setTypeface(tvTitre.getTypeface(), android.graphics.Typeface.BOLD);
+
+        TextView tvNumeros = new TextView(this);
+        tvNumeros.setText(generateurSysteme.formaterGrille(grille));
+        tvNumeros.setTextColor(ContextCompat.getColor(this, R.color.textPrimary));
+        tvNumeros.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+        tvNumeros.setTypeface(android.graphics.Typeface.MONOSPACE);
+        tvNumeros.setPadding(0, dp(2), 0, dp(4));
+
+        TextView tvGain = new TextView(this);
+        tvGain.setText(bons + " bons numéros — Gain : " + gain + (gain > 1 ? " paires" : " paire"));
+        tvGain.setTextColor(ContextCompat.getColor(this, R.color.textSecondary));
+        tvGain.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
+
+        conteneur.addView(tvTitre);
+        conteneur.addView(tvNumeros);
+        conteneur.addView(tvGain);
+
+        return conteneur;
+    }
+
+    private View creerVueResume(int nombreGrillesGagnantes, int totalPairesGagnees) {
+        TextView tvResume = new TextView(this);
+        tvResume.setTextColor(ContextCompat.getColor(this, R.color.textPrimary));
+        tvResume.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        tvResume.setPadding(dp(4), dp(12), dp(4), dp(4));
+        tvResume.setGravity(Gravity.START);
+
+        String texte = "========================\n"
+                + "RÉSUMÉ\n"
+                + "========================\n"
+                + "Grilles gagnantes : " + nombreGrillesGagnantes + "\n"
+                + "Total des gains : " + totalPairesGagnees + " paires";
+
+        if (nombreGrillesGagnantes == 0) {
+            texte = "Aucune grille gagnante pour ce tirage.";
+        }
+
+        tvResume.setText(texte);
+        return tvResume;
+    }
+
+    private int dp(int valeur) {
+        return (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, valeur, getResources().getDisplayMetrics());
     }
 
     /**
